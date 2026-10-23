@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mudança de Cor Aleatória</title>
+  <link rel="stylesheet" href="background.css">
+</head>
+<body>
+
+  <!-- O único elemento interativo da página -->
+  <button class="botao-cor" id="btnMudarCor">Mudar Cor de Fundo</button>
+  <script>
+    
+    /* ------------------------------------------------------------------------
+       PASSO 1: CAPTURA DO ELEMENTO (DOM)
+       Dizemos ao JavaScript qual elemento do HTML ele deve vigiar e controlar.
+       ------------------------------------------------------------------------ */
+    // Usamos o método 'getElementById' para buscar na página o botão com a ID exata.
+    const botao = document.getElementById('btnMudarCor');
+
+
+    /* ------------------------------------------------------------------------
+       PASSO 2: A FÁBRICA DE CORES (FUNÇÃO MATEMÁTICA)
+       Entendendo a diferença de bases numéricas:
+       - Sistema Decimal (Base 10): Usa 10 algarismos (0 a 9). É o que usamos no dia a dia.
+       - Sistema Hexadecimal (Base 16): Usa 16 símbolos (0 a 9 + letras de A até F).
+       ------------------------------------------------------------------------ */
+    function gerarCorAleatoria() {
+      
+      // Criamos uma lista com os 16 símbolos hexadecimais ordenados de seus índices (0 a 15)
+      const caracteres = '0123456789ABCDEF';
+      
+      // Toda cor hexadecimal precisa começar obrigatoriamente com o caractere '#'
+      let cor = '#';
+      
+      // Um código de cor precisa de 6 caracteres após o '#'. 
+      // Por isso, criamos um laço de repetição (Loop) que vai rodar exatamente 6 vezes.
+      for (let i = 0; i < 6; i++) {
+        
+        /* A MATEMÁTICA DO SORTEIO:
+           - Math.random(): Sorteia um número decimal quebrado entre 0 e 0.999...
+           - Multiplicar por 16: Transforma o sorteio em um número de 0 a 15.999...
+           - Math.floor(): Corta as casas decimais (arredonda para baixo).
+           Resultado final: Um número inteiro puro de 0 a 15 (perfeito para nossa Base 16). */
+        const indiceAleatorio = Math.floor(Math.random() * 16);
+        
+        // Pegamos o caractere que está na posição sorteada e grudamos ele na nossa variável 'cor'
+        cor += caracteres[indiceAleatorio];
+      }
+      
+      // Quando o loop termina, a função nos devolve a cor prontinha (Exemplo: "#FF3344")
+      return cor;
+    }
+
+
+    /* ------------------------------------------------------------------------
+       PASSO 3: O ESCUTADOR DE EVENTOS (INTERAÇÃO INTERNA)
+       Dizemos ao botão o que ele deve fazer quando receber uma ação física.
+       ------------------------------------------------------------------------ */
+    // Adicionamos um "ouvinte" que fica esperando o usuário dar um 'click' no botão.
+    botao.addEventListener('click', function() {
+      
+      // A) Executa a nossa fábrica do Passo 2 e guarda o texto sorteado na variável 'novaCor'
+      const novaCor = gerarCorAleatoria();
+      
+      // B) Acessa o estilo em tempo real do elemento <body> e altera a sua propriedade CSS 
+      //    'backgroundColor' para receber a nova cor sorteada.
+      document.body.style.backgroundColor = novaCor;
+    });
+
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,107 @@
+/* Configuração básica da tela */
+body {
+    background-color: #f4ede4; /* Cor de mesa de madeira clara */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100vh;
+    margin: 0;
+    padding-top: 50px;
+}
+
+/* Container do Sanduíche */
+.container-sanduiche {
+    width: 520px;
+    perspective: 1000px; /* Efeito 3D sutil para o recheio cair */
+}
+
+/* Fatia de Pão Superior (O botão do menu) */
+.pao-superior {
+    background-color: #d7a15c; /* Cor de pão bagete dourado */
+    color: #4a2f13;
+    font-weight: bold;
+    text-align: center;
+    padding: 15px;
+    border-radius: 8px 8px 0 0;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    cursor: pointer;
+    border-bottom: 3px solid #b57c38;
+    position: relative;
+    transition: background 0.3s;
+}
+
+/* Quando você passa o mouse sobre um botão e ele muda de cor e/ou ganha uma sombra. */
+.pao-superior:hover {
+    background-color: #c58f49; /* Pão fica "tostado" ao passar o mouse */
+}
+
+/* Recheio Dropdown (Escondido por padrão) */
+.recheio-dropdown {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    
+    /* Truque CSS para esconder e dar efeito de queda */
+    opacity: 0;
+    transform: rotateX(-90deg);
+    transform-origin: top;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    pointer-events: none; 
+}
+
+/* O CLIQUE OU PASSAR DE MOUSE (Ativação sem Javascript) */
+.pao-superior:hover .recheio-dropdown {
+    opacity: 1;
+    transform: rotateX(0deg); /* Faz o recheio cair de forma realista */
+    pointer-events: auto;
+}
+
+/* Estilo geral dos ingredientes (itens do menu) */
+.ingrediente {
+    padding: 15px;
+    text-align: left;
+    font-size: 0.95em;
+    font-weight: 600;
+    border-bottom: 1px rgba(0,0,0,0.05) solid;
+    transition: transform 0.2s;
+}
+
+/* Deixando os ingredientes visualmente apetitosos */
+.queijo {
+    background-color: #ffd43f; /* Amarelo queijo derretido */
+    color: #5c4300;
+    border-left: 8px solid #ffb000;
+}
+
+.presunto {
+    background-color: #ffb3ba; /* Rosa presunto */
+    color: #5e2126;
+    border-left: 8px solid #ff808b;
+}
+
+.manteiga {
+    background-color: #fffac2; /* Amarelo bem claro */
+    color: #4d4911;
+    border-left: 8px solid #ebe16c;
+}
+
+/* Fatia de Pão Inferior (Fecha o menu/sanduíche) */
+.pao-inferior {
+    background-color: #d7a15c;
+    color: #4a2f13;
+    border-radius: 0 0 8px 8px;
+    border-top: 2px solid #b57c38;
+    border-left: 8px solid #b57c38;
+    box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+}
+
+/* Efeito interativo ao passar o mouse em cada ingrediente */
+.ingrediente:hover {
+    transform: scale(1.03); /* O ingrediente "salta" levemente do sanduíche */
+    z-index: 10;
+}

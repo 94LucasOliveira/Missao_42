@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculadora Básica</title>
+</head>
+<body>
+
+  <!-- Formulário que agrupa os campos e intercepta o envio -->
+  <form id="calcForm">
+    <!-- Membro Esquerdo -->
+    <input type="text" id="esquerdo" placeholder="Número 1">
+    
+    <!-- Menu de Operadores -->
+    <select id="operador">
+      <option value="+">+</option>
+      <option value="-">-</option>
+      <option value="*">*</option>
+      <option value="/">/</option>
+      <option value="%">%</option>
+    </select>
+    
+    <!-- Membro Direito -->
+    <input type="text" id="direito" placeholder="Número 2">
+    
+    <!-- Botão Submit -->
+    <input type="submit" value="Try me!">
+  </form>
+
+  <script>
+    // ------------------------------------------------------------------------
+    // REGRA DO TEMPORIZADOR: Roda a cada 30.000 milissegundos (30 segundos)
+    // ------------------------------------------------------------------------
+    setInterval(function() {
+      alert('Please, use me...');
+    }, 30000);
+
+    // ------------------------------------------------------------------------
+    // SISTEMA PRINCIPAL DA CALCULADORA
+    // ------------------------------------------------------------------------
+    const formulario = document.getElementById('calcForm');
+
+    formulario.addEventListener('submit', function(evento) {
+      // Impede a página de recarregar ao enviar o formulário
+      evento.preventDefault();
+
+      // Captura as strings digitadas nos inputs e o operador selecionado
+      const textoEsquerdo = document.getElementById('esquerdo').value;
+      const textoDireito = document.getElementById('direito').value;
+      const operador = document.getElementById('operador').value;
+
+      // REGRA DE SEGURANÇA 1: Expressão Regular para testar se contém APENAS dígitos de 0 a 9
+      // Isso rejeita automaticamente números negativos, decimais com ponto/vírgula e letras.
+      const apenasInteirosPositivos = /^\d+$/;
+
+      if (!apenasInteirosPositivos.test(textoEsquerdo) || !apenasInteirosPositivos.test(textoDireito)) {
+        alert('Error :(');
+        return; // Interrompe a execução aqui
+      }
+
+      // Converte os textos validados em números inteiros reais para o cálculo
+      const n1 = parseInt(textoEsquerdo, 10);
+      const n2 = parseInt(textoDireito, 10);
+
+      // REGRA DE SEGURANÇA 2: Proibir divisão ou resto por zero
+      if ((operador === '/' || operador === '%') && n2 === 0) {
+        alert("It’s over 9000!");
+        console.log("It’s over 9000!");
+        return; // Interrompe a execução aqui
+      }
+
+      // EXECUÇÃO DO CÁLCULO NATIVO
+      let resultado;
+      if (operador === '+') resultado = n1 + n2;
+      else if (operador === '-') resultado = n1 - n2;
+      else if (operador === '*') resultado = n1 * n2;
+      else if (operador === '/') resultado = n1 / n2;
+      else if (operador === '%') resultado = n1 % n2;
+
+      // EXIBIÇÃO FINAL DOS RESULTADOS
+      alert(resultado);
+      console.log('Resultado do cálculo:', resultado);
+    });
+  </script>
+
+</body>
+</html>

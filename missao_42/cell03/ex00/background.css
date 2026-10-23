@@ -1,0 +1,79 @@
+body {
+  /* Remove as margens e espaçamentos padrão que o navegador coloca nas bordas */
+  margin: 0;
+  padding: 0;
+  
+  /* Garante que o fundo cubra no mínimo 100% da altura da tela visualizada */
+  min-height: 100vh;
+  
+  /* Ativa o modelo Flexbox para alinhar e centralizar elementos filhos com facilidade */
+  display: flex;
+  
+  /* Centraliza o botão na horizontal (eixo principal) */
+  justify-content: center;
+  
+  /* Centraliza o botão na vertical (eixo cruzado) */
+  align-items: center;
+  
+  /* Define uma fonte limpa e sem serifa (detalhes nas pontas das letras) */
+  font-family: sans-serif;
+  
+  /* Cria uma animação suave de 0.4 segundos quando o JavaScript alterar a cor do fundo */
+  transition: background-color 0.4s ease; 
+  
+  /* Define a cor cinza claro como o fundo padrão assim que a página abre */
+  background-color: #f0f0f0; 
+}
+
+/* ==========================================================================
+   2. ESTILIZAÇÃO DO BOTÃO CENTRALIZADO (.BOTAO-COR)
+   ========================================================================== */
+.botao-cor {
+  /* Espaçamento interno: 15px em cima/baixo e 30px nas laterais da palavra */
+  padding: 15px 30px;
+  
+  /* Define o tamanho da letra do botão */
+  font-size: 1.1rem;
+  
+  /* Deixa o texto em negrito */
+  font-weight: bold;
+  
+  /* Força todas as letras do botão a ficarem maiúsculas */
+  text-transform: uppercase;
+  
+  /* Transforma a seta do mouse naquela "mãozinha" de clique quando passa por cima */
+  cursor: pointer;
+  
+  /* Define a cor de fundo interna do botão como preto */
+  background-color: #111111;
+  
+  /* Define a cor do texto do botão como branco */
+  color: #ffffff;
+  
+  /* Cria uma borda sólida preta de 2px de espessura */
+  border: 2px solid #111111;
+  
+  /* Arredonda levemente os cantos do botão */
+  border-radius: 5px;
+  
+  /* Aplica uma sombra suave abaixo do botão para dar efeito de profundidade */
+  box-shadow: 0 4px 6px rgb(7, 7, 7);
+  
+  /* Suaviza as animações de clique (escala) e de passar o mouse (troca de cor) */
+  transition: transform 0.1s ease, background-color 0.2s ease;
+}
+
+/* ==========================================================================
+   3. EFEITOS DE INTERAÇÃO DO BOTÃO (HOVER E ACTIVE)
+   ========================================================================== */
+/* Executa quando o usuário passa o ponteiro do mouse por cima do botão */
+.botao-cor:hover {
+  /* Altera o fundo preto para um cinza escuro, indicando interatividade */
+  background-color: #333333;
+}
+
+/* Executa exatamente no momento em que o usuário clica e segura o botão */
+.botao-cor:active {
+  /* Reduz levemente o tamanho do botão para 95%, simulando o efeito físico de afundar */
+  transform: scale(0.95);
+}

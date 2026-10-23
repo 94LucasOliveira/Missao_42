@@ -1,0 +1,215 @@
+/* ==========================================================================
+   1. RESET BÁSICO (Redefinição Geral)
+   ========================================================================== */
+* {
+  /* Remove o espaçamento externo padrão que os navegadores colocam nos elementos */
+  margin: 0;
+  
+  /* Remove o preenchimento interno padrão dos elementos */
+  padding: 0;
+  
+  /* Faz com que bordas e paddings sejam calculados DENTRO da largura estipulada, 
+     evitando que caixas quebrem o layout ou gerem barras de rolagem indesejadas */
+  box-sizing: border-box;
+}
+
+body {
+  /* Define a família tipográfica da página (usa 'Inter', se falhar puxa uma sem serifa) */
+  font-family: 'Inter', sans-serif;
+  
+  /* Define a cor padrão de todos os textos como branco */
+  color: #ffffff;
+  
+  /* Define a cor de fundo padrão da página inteira como preto */
+  background-color: #000000;
+  
+  /* Esconde qualquer conteúdo que tente vazar horizontalmente (evita rolagem lateral) */
+  overflow-x: hidden;
+}
+
+
+/* ==========================================================================
+   2. CONFIGURAÇÃO DO EFEITO PARALLAX
+   ========================================================================== */
+.parallax-section {
+  /* Permite posicionar elementos filhos (como o .overlay) de forma absoluta em relação a esta seção */
+  position: relative;
+  
+  /* Força a seção a ocupar exatamente 100% da altura da tela visível do usuário */
+  height: 100vh; 
+  
+  /* Força a seção a ocupar toda a largura disponível na tela */
+  width: 100%;
+  
+  /* Ativa o modelo Flexbox para alinhar e posicionar conteúdos internos com facilidade */
+  display: flex;
+  
+  /* Centraliza o conteúdo verticalmente dentro do container flex */
+  align-items: center;
+  
+  /* Centraliza o conteúdo horizontalmente dentro do container flex */
+  justify-content: center;
+  
+  /* O SEGREDO DO PARALLAX: Fixa a imagem no fundo. O conteúdo rola por cima, mas a foto fica parada */
+  background-attachment: fixed;
+  
+  /* Centraliza horizontalmente e alinha a imagem pelo topo (preserva o logo vermelho "AKIRA") */
+  background-position: center top; 
+  
+  /* Impede que o navegador repita a imagem como um mosaico caso a seção seja maior que a foto */
+  background-repeat: no-repeat;
+  
+  /* Preserva a proporção vertical (2:3) original dos cartazes, exibindo-os inteiros sem cortes laterais */
+  background-size: contain; 
+  
+  /* Se o monitor for muito largo, preenche as sobras vazias da lateral com a cor preta por segurança */
+  background-color: #000000; 
+}
+
+
+/* ==========================================================================
+   3. ESTILIZAÇÃO ESPECÍFICA DAS SEÇÕES (CUSTOMIZAÇÃO AKIRA)
+   ========================================================================== */
+.bg-foto1 {
+  /* Puxa o link da primeira imagem (Kaneda caminhando em direção à moto) */
+  background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWXFvaNfsQFKlVHgjVog4Csa7KUFFv-nQEbwhaGEwOug&s=10'); 
+  
+  /* Define o fundo como branco para emoldurar as laterais vazias desse cartaz específico */
+  background-color: #ffffff; 
+}
+
+.bg-foto2 {
+  /* Puxa o link da segunda imagem (Tetsuo sentado no trono de destroços) */
+  background-image: url('https://grupoestacao.com.br/wp-content/uploads/2026/08/akira-scaled.webp'); 
+  
+  /* Define o fundo com o tom de vermelho exato do pôster, fundindo as bordas perfeitamente em telas largas */
+  background-color: #ef1e24; 
+}
+
+
+/* ==========================================================================
+   4. CAMADAS DE CONTEÚDO (Texto e Filtros)
+   ========================================================================== */
+.overlay {
+  /* Desatola o filtro do fluxo comum e permite cobrir a seção inteira */
+  position: absolute;
+  
+  /* Fixa o início da cobertura no topo esquerdo do bloco */
+  top: 0;
+  left: 0;
+  
+  /* Garante cobertura total de largura e altura da seção */
+  width: 100%;
+  height: 100%;
+  
+  /* Cria uma película preta sutil com 25% de opacidade para dar contraste e leitura às frases brancas */
+  background: rgba(0, 0, 0, 0.25);
+  
+  /* Define a ordem de empilhamento (Camada 1: fica acima da imagem, mas abaixo do texto) */
+  z-index: 1;
+}
+
+.content {
+  /* Garante que o container de texto respeite as regras de empilhamento e posicionamento */
+  position: relative;
+  
+  /* Define a ordem de empilhamento (Camada 2: fica acima do overlay escuro para o texto ficar nítido) */
+  z-index: 2;
+  
+  /* Centraliza o alinhamento de todas as linhas de texto */
+  text-align: center;
+  
+  /* Adiciona uma folga interna de 20px nas laterais para o texto não colar na borda em telas pequenas */
+  padding: 0 20px;
+}
+
+.parallax-section h1 {
+  /* Define o tamanho do título principal em uma unidade proporcional à tela (bem grande) */
+  font-size: 3.5rem;
+  
+  /* Define a espessura da fonte como Extra-Bold para dar impacto visual agressivo no estilo mangá */
+  font-weight: 800; 
+  
+  /* Aumenta o espaçamento entre as letras do título para melhorar a elegância e leitura */
+  letter-spacing: 2px;
+  
+  /* Aplica duas sombras: uma preta focada abaixo e uma névoa escura ampla ao redor para destacar o texto */
+  text-shadow: 0px 4px 15px rgba(0, 0, 0, 0.8), 0px 0px 30px rgba(0, 0, 0, 0.5); 
+  
+  /* Força todas as letras a ficarem em maiúsculas automaticamente */
+  text-transform: uppercase;
+}
+
+
+/* ==========================================================================
+   5. BLOCO PRETO INTERMEDIÁRIO
+   ========================================================================== */
+.dark-section {
+  /* Ocupa exatamente 60% da altura da tela atual, criando uma quebra de ritmo na rolagem */
+  height: 60vh; 
+  
+  /* Usa uma tonalidade de cinza grafite quase preto, trazendo um visual moderno e profundo */
+  background-color: #050505; 
+  
+  /* Ativa o Flexbox para alinhar os elementos internos */
+  display: flex;
+  
+  /* Centraliza o bloco de citação perfeitamente no meio horizontal e vertical do espaço */
+  align-items: center;
+  justify-content: center;
+  
+  /* Garante o contexto para renderizar sombras ou controlar o empilhamento corretamente */
+  position: relative;
+  
+  /* Força este bloco a ficar na camada mais alta, deslizando de forma absoluta sobre o parallax */
+  z-index: 3; 
+  
+  /* Cria uma sombra suave projetada para cima e para baixo, acentuando a separação das seções */
+  box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.9);
+}
+
+.dark-section .quote {
+  /* Define o tamanho da fonte da frase em tamanho médio e elegante */
+  font-size: 1.8rem;
+  
+  /* Peso semi-bold (semi-negrito) para destacar a citação */
+  font-weight: 600;
+  
+  /* Impede que o texto se estique horizontalmente além de 600px em monitores grandes */
+  max-width: 600px;
+  
+  /* Controla o espaçamento vertical entre as linhas de texto para uma leitura confortável */
+  line-height: 1.6;
+  
+  /* Aplica um tom cinza claro refinado ao invés de usar o branco puro */
+  color: #a0a0a0; 
+  
+  /* Adiciona a icônica barra vertical sólida à esquerda usando o Vermelho da marca Akira */
+  border-left: 4px solid #ef1e24; 
+  
+  /* Cria um recuo de 20px entre a barra vermelha vertical e o início do texto */
+  padding-left: 20px;
+}
+
+
+/* ==========================================================================
+   6. RESPONSIVIDADE (Ajustes para Celulares)
+   ========================================================================== */
+@media (max-width: 768px) {
+  .parallax-section {
+    /* Em dispositivos móveis (telas verticais), altera para 'cover'. Isso preenche toda a tela 
+       do celular com a arte do pôster sem distorcer e sem deixar barras vazias nas laterais */
+    background-size: cover; 
+  }
+  
+  .parallax-section h1 {
+    /* Diminui o tamanho do título para caber confortavelmente em displays estreitos de smartphones */
+    font-size: 2.2rem;
+  }
+  
+  .dark-section .quote {
+    /* Diminui o tamanho da citação para que ela não ocupe espaço demais na tela do celular */
+    font-size: 1.3rem;
+  }
+}
+

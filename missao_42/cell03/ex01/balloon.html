@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>O Balão Interativo</title>
+  
+  <style>
+    /* Centraliza o balão na tela */
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #f0f0f0;
+      font-family: sans-serif;
+    }
+
+    /* O BALÃO: Começa como um quadrado de 200x200 */
+    .balao {
+      width: 200px;
+      height: 200px;
+      background-color: red; /* Cor inicial */
+      
+      /* O segredo do círculo: 50% de arredondamento transforma o quadrado em redondo perfeito */
+      border-radius: 50%; 
+      
+      /* Efeito visual para parecer um balão tridimensional */
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+      cursor: pointer;
+      
+      /* Transição sutil para o balão inflar e desinflar suavemente */
+      transition: width 0.1s ease, height 0.1s ease, background-color 0.2s ease;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- O Balão em si -->
+  <div class="balao" id="meuBalao"></div>
+
+  <!-- LÓGICA EM JAVASCRIPT BÁSICO NATIVO -->
+  <script>
+    // 1. MAPEAMENTO DE ELEMENTOS E VARIÁVEIS DE CONTROLE
+    const balao = document.getElementById('meuBalao');
+    
+    let tamanhoAtual = 200; // Tamanho inicial em pixels (largura e altura são iguais)
+    let indiceCor = 0;      // Guarda a posição da cor atual na lista abaixo
+    
+    // A lista de cores na ordem exata exigida
+    const cores = ['red', 'green', 'blue'];
+
+    // 2. FUNÇÃO AUXILIAR: Atualiza o visual do balão na tela
+    function atualizarBalao() {
+      balao.style.width = tamanhoAtual + 'px';
+      balao.style.height = tamanhoAtual + 'px';
+      balao.style.backgroundColor = cores[indiceCor];
+    }
+
+    // ==========================================================================
+    // AÇÃO 1: CLIQUE NO BALÃO (Aumenta tamanho e avança a cor)
+    // ==========================================================================
+    balao.addEventListener('click', function() {
+      // Passo A: Aumenta o tamanho em 10px
+      tamanhoAtual += 10;
+      
+      // Passo B: Avança para a próxima cor (Vermelho -> Verde -> Azul -> Vermelho...)
+      indiceCor += 1;
+      if (indiceCor >= cores.length) {
+        indiceCor = 0; // Volta para o início (Vermelho) se estourar o limite da lista
+      }
+      
+      // Passo C: Teste de Explosão (Se ficar maior que 420px, ele estoura e reseta)
+      if (tamanhoAtual > 420) {
+        alert('💥 O balão explodiu!');
+        tamanhoAtual = 200; // Retorna ao tamanho original
+        indiceCor = 0;      // Retorna para a cor vermelha inicial
+      }
+      
+      // Aplica as mudanças na tela
+      atualizarBalao();
+    });
+
+    // ==========================================================================
+    // AÇÃO 2: MOUSE SAI DO BALÃO (Diminui tamanho e retrocede a cor)
+    // ==========================================================================
+    balao.addEventListener('mouseleave', function() {
+      // Passo A: Diminui o tamanho em 5px
+      tamanhoAtual -= 5;
+      
+      // Trava de Segurança: Não deixa o balão ficar menor que o tamanho original de 200px
+      if (tamanhoAtual < 200) {
+        tamanhoAtual = 200;
+      }
+      
+      // Passo B: Volta para a cor anterior (Ordem inversa: Azul -> Verde -> Vermelho...)
+      indiceCor -= 1;
+      if (indiceCor < 0) {
+        indiceCor = cores.length - 1; // Se for menor que zero, vai para a última cor (Azul)
+      }
+      
+      // Aplica as mudanças na tela
+      atualizarBalao();
+    });
+  </script>
+
+</body>
+</html>
